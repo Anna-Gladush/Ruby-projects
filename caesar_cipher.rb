@@ -1,4 +1,4 @@
-def caesar_cipher(string, step)
+def caesar_cipher(string, step = 1)
   # You will need to remember how to convert a string into a number.
   # Don’t forget to wrap from z to a.
   # Don’t forget to keep the same case.
@@ -8,19 +8,23 @@ def caesar_cipher(string, step)
   new_words = []
   result = []
   str_array.each do |words|
-    shift_letter = []
+    deciphered_letter = []
     word = words.split("")
     word.each do |letter|
-      if ((65 <= letter.ord && letter.ord <= 90) || (97 <= letter.ord && letter.ord <= 122))
-        shift_letter.push((letter.ord + 1).chr) 
+      if (letter.ord + step) > 90 && (65 <= letter.ord && letter.ord <= 90)
+        letter_shifted = 65 + letter.ord + (step - 1) - 90
+        deciphered_letter.push((letter_shifted.ord).chr)
+      elsif (letter.ord + step) > 122 && (97 <= letter.ord && letter.ord <= 122)
+        letter_shifted = 97 + letter.ord + (step - 1) - 122
+        deciphered_letter.push((letter_shifted.ord).chr)
+      elsif (65 <= letter.ord && letter.ord <= 90) || (97 <= letter.ord && letter.ord <= 122)
+        deciphered_letter.push((letter.ord + step).chr) 
       else
-        shift_letter.push(letter)
+        deciphered_letter.push(letter)
       end
     end
-    new_words.push(shift_letter)
-    new_words.push(" ")
+    new_words.push(deciphered_letter, " ")
   end
-  # debugger
   new_words.each do |words|
     if words.respond_to?(:to_a)
       result.push(words.join)
@@ -28,7 +32,6 @@ def caesar_cipher(string, step)
       result.push(words)
     end
   end
-  debugger
   result.pop
   result.join
 end
@@ -38,6 +41,7 @@ def caesar_decipher(string, step)
   # Don’t forget to keep the same case.
   
 end
-caesar_cipher("What a string!", 1)
+p caesar_cipher("Zorro!")
+p caesar_cipher("What a string!", 5)
 # caesar_cipher("What a string!", 5)
 # caesar_decipher("Bmfy f xywnsl!", 5)

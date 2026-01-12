@@ -1,15 +1,12 @@
 def stock_picker(array)
   # takes in an array of stock prices, one for each hypothetical day. It should return a pair of days representing the best day to buy and the best day to sell. Days start at 0.
-  # Quick Tips:
-    # You need to buy before you can sell
-    # Pay attention to edge cases like when the lowest day is the last day or the highest day is the first day.
+
   sell = array[1..-1].max
   sell_idx = array.find_index(sell)
   buy = array[0..sell_idx].min
   buy_idx = array.find_index(buy)
   [buy_idx, sell_idx]
-# array[0..-2].min, 
-    #return = [best_to_buy, best_to_sell]
+
 end
 
 p stock_picker([17,3,6,9,15,8,6,1,10])

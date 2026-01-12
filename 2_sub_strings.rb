@@ -1,16 +1,15 @@
-def substrings(string, dictionary)
-  # Quick Tip: Recall how to turn strings into arrays and arrays into strings.
-  #should return a hash listing each substring (case insensitive) that was found in the original string and how many times it was found.
-  # > substrings("Howdy partner, sit down! How's it going?", dictionary)
-  # => { "down" => 1, "go" => 1, "going" => 1, "how" => 2, "howdy" => 1, "it" => 2, "i" => 3, "own" => 1, "part" => 1, "partner" => 1, "sit" => 1 }
-
+def substrings(string, dictionary = dictionary)
   result = Hash.new(0)
-  # Makes an array for substrings
-  # string = "below"
+  word_list = []
   combinations_storage = []
   substring_storage = []
-  work = string.split("")
-  work.each_with_index {|char, idx| combinations_storage << work.combination(idx+1).to_a}
+  
+  # Makes an array for substrings
+  sentence = string.split(" ").map {|letter| letter.downcase}
+  sentence.each do |word| # ["howdy", "partner,", "sit", "down!", "how's", "it", "going?"]
+    word_list << word.split("").select {|letter| (letter != " ")&&(letter != "!")&&(letter != "?")&&(letter != ",")&&(letter != ".")&&(letter != "'")}
+  end
+  word_list.each {|word| word.each_with_index {|char, idx| combinations_storage << word.combination(idx+1).to_a}}
   combinations_storage.each {|arr| arr.each {|array| substring_storage << array.join}}
 
   # Checks if substring in substring_storage is in dictionary
@@ -21,10 +20,10 @@ def substrings(string, dictionary)
       end
     end
   end
-  p result
-  # Next, make sure your method can handle multiple words:
-  #  > substrings("Howdy partner, sit down! How's it going?", dictionary)
-  # => { "down" => 1, "go" => 1, "going" => 1, "how" => 2, "howdy" => 1, "it" => 2, "i" => 3, "own" => 1, "part" => 1, "partner" => 1, "sit" => 1 }
+  result
 end
+
 dictionary = ["below","down","go","going","horn","how","howdy","it","i","low","own","part","partner","sit"]
-substrings("below", dictionary)
+
+# p substrings("below", dictionary)
+# p substrings("Howdy partner, sit down! How's it going?", dictionary)

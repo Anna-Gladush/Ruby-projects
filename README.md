@@ -12,6 +12,7 @@ From Wikipedia:
 ## Sub Strings
 From Wikipedia:
 
+
 "A string-searching algorithm, sometimes called string-matching algorithm, is an algorithm that searches a body of text for portions that match by pattern."
 
 [Sub Strings](https://github.com/Anna-Gladush/Project-Caesar-Cipher/blob/main/2_sub_strings.rb)
@@ -19,10 +20,16 @@ From Wikipedia:
 ## Stock Picker
 From The Odin Project:
 
+
 "Takes in an array of stock prices, one for each hypothetical day. It should return a pair of days representing the best day to buy and the best day to sell. Days start at 0."
 
 [Stock Picker](https://github.com/Anna-Gladush/Project-Caesar-Cipher/blob/main/3_stock_picker.rb)
 
 
 ## Bubble Sort
-nothing to see here, yet
+From Wikipedia:
+
+
+"Bubble sort, sometimes referred to as sinking sort, is a simple sorting algorithm that repeatedly steps through the input list element by element, comparing the current element with the one after it, swapping their values if needed. These passes through the list are repeated until no swaps have to be performed during a pass, meaning that the list has become fully sorted."
+
+[Bubble Sort](https://github.com/Anna-Gladush/Project-Caesar-Cipher/blob/main/4_bubble_sort.rb)

@@ -1,5 +1,5 @@
 def stock_picker(array)
-  return "ERROR" if array.length < 2 || (array.length == 2 && array[0] > array[1])
+  return 'ERROR' if array.length < 2 || (array.length == 2 && array[0] > array[1])
   return [array.find_index(array.min), array.find_index(array.max)] if array.length == 2
 
   sell_day = 0
@@ -8,17 +8,15 @@ def stock_picker(array)
 
   # Sell index
 
-  array[1..-1].each_with_index do |day, i| 
+  array[1..].each_with_index do |day, i|
     if day >= sell_day
       sell_day = day
-      sell_idx = i+1
+      sell_idx = i + 1
     end
   end
 
   buy_day = sell_day
-  if buy_day < array[0]
-    buy_day = array[0]
-  end
+  buy_day = array[0] if buy_day < array[0]
 
   # Buy index
   array[0..sell_idx].each_with_index do |day, i|
@@ -27,8 +25,7 @@ def stock_picker(array)
       buy_idx = i
     end
   end
-  result = [buy_idx, sell_idx]
-  result
+  [buy_idx, sell_idx]
 end
 
 # p stock_picker([17,3,6,9,15,8,6,1,10])

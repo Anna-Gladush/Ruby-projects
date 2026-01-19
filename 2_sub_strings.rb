@@ -1,6 +1,4 @@
-dictionary = ['below','down','go','going','horn','how','howdy','it','i','low','own','part','partner','sit']
-
-def substrings(string, dictionary = dictionary)
+def substrings(string, dictionary)
   result = Hash.new(0)
   word_list = []
   combinations_storage = []
@@ -22,6 +20,6 @@ def substrings(string, dictionary = dictionary)
   end
   result
 end
-
+# dictionary = ['below', 'down', 'go', 'going', 'horn', 'how', 'howdy', 'it', 'i', 'low', 'own', 'part', 'partner', 'sit']
 # p substrings('below', dictionary)
 # p substrings("Howdy partner, sit down! How's it going?", dictionary)

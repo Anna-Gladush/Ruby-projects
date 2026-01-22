@@ -3,7 +3,7 @@ a_row = ' 1 | 2 | 3 '
 c_row = ' 4 | 5 | 6 '
 e_row = ' 7 | 8 | 9 '
 divider = '-----------'
-puts a_row, divider, c_row, divider, e_row, divider
+puts a_row, divider, c_row, divider, e_row
 
 # used_numbers = []
 x_positions = []
@@ -22,6 +22,22 @@ def turn(symbol_positions, symbol, a_row, c_row, e_row)
   [a_row, c_row, e_row]
 end
 # used_numbers << answer
+
+# statements for checking winning conditions
+def win_check(symbol_positions, symbol)
+  player = symbol == 'X' ? 1 : 2
+  if symbol_positions.all?([1, 2, 3]) || symbol_positions.all?([4, 5, 6]) || symbol_positions.all?([7, 8, 9])
+    puts "Player #{player} has won"
+    'yes'
+  elsif symbol_positions.all?([1, 4, 7]) || symbol_positions.all?([2, 5, 8]) || symbol_positions.all?([3, 6, 9])
+    puts "Player #{player} has won"
+    'yes'
+  elsif symbol_positions.all?([1, 5, 9]) || symbol_positions.all?([3, 5, 7])
+    puts "Player #{player} has won"
+    'yes'
+  end
+end
+
 answer = [' 1 | 2 | 3 ', ' 4 | 5 | 6 ', ' 7 | 8 | 9 ']
 i = 9
 while i >= 1
@@ -29,6 +45,9 @@ while i >= 1
   answer = turn(x_positions, 'X', answer[0], answer[1], answer[2])
   puts answer[0], divider, answer[1], divider, answer[2]
   i -= 1
+  break if win_check(x_positions, 'X') == 'yes'
+
+  puts x_positions
 
   next if i <= 0
 
@@ -36,14 +55,10 @@ while i >= 1
   answer = turn(o_positions, 'O', answer[0], answer[1], answer[2])
   i -= 1
   puts answer[0], divider, answer[1], divider, answer[2]
+  break if win_check(o_positions, 'O') == 'yes'
+
+  puts o_positions
 end
-# statements for checking winning conditions
-puts 'Player 1 has won' if x_positions.include?([1,2,3]) || x_positions.include?([4,5,6]) || x_positions.include?([7,8,9])
-puts 'Player 1 has won' if x_positions.include?([1,4,7]) || x_positions.include?([2,5,8]) || x_positions.include?([3,6,9])
-puts 'Player 1 has won' if x_positions.include?([1,5,9]) || x_positions.include?([3,5,7])
-puts 'Player 2 has won' if o_positions.include?([1,2,3]) || o_positions.include?([4,5,6]) || o_positions.include?([7,8,9])
-puts 'Player 2 has won' if o_positions.include?([1,4,7]) || o_positions.include?([2,5,8]) || o_positions.include?([3,6,9])
-puts 'Player 2 has won' if o_positions.include?([1,5,9]) || o_positions.include?([3,5,7])
 
 # puts c.count('O')
 # puts `clear` #will clear the output

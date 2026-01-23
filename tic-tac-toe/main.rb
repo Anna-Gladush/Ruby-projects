@@ -1,3 +1,4 @@
+require 'rainbow'
 require_relative 'player'
 
 def round
@@ -23,7 +24,7 @@ def round
   while i >= 1
     puts 'Player 1 turn: '
     answer = player1.turn(answer[0], answer[1], answer[2])
-    puts answer[0], divider, answer[1], divider, answer[2]
+    puts divider, answer[0], divider, answer[1], divider, answer[2]
     i -= 1
     break if player1.win_check? == true
 
@@ -31,7 +32,7 @@ def round
 
     puts 'Player 2 turn: '
     answer = player2.turn(answer[0], answer[1], answer[2])
-    puts answer[0], divider, answer[1], divider, answer[2]
+    puts divider, answer[0], divider, answer[1], divider, answer[2]
     i -= 1
     break if player2.win_check? == true
   end

@@ -23,7 +23,7 @@ class Player
     end
     @symbol_positions << answer
     # correcting rainbow replacing symbols with unreadable strings
-    a_row = ReplaceRainbow(a_row)
+    a_row = replace_artifacts(a_row)
 
     [a_row, c_row, e_row]
   end

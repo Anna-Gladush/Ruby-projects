@@ -37,7 +37,7 @@ def round
   end
 end
 
-def ReplaceRainbow(string)
+def replace_artifacts(string)
   # correcting rainbow replacing symbols with unreadable strings
   string = string.gsub(" \e[\e[31mX\e[0m1mX\e[0m ", " \e[31mX\e[0m ")
   string = string.gsub(" \e[\e[31mX\e[0m2mO\e[0m ", " \e[32mO\e[0m ")

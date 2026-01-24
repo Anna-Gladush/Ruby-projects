@@ -37,4 +37,12 @@ def round
   end
 end
 
+def ReplaceRainbow(string)
+  # correcting rainbow replacing symbols with unreadable strings
+  string = string.gsub(" \e[\e[31mX\e[0m1mX\e[0m ", " \e[31mX\e[0m ")
+  string = string.gsub(" \e[\e[31mX\e[0m2mO\e[0m ", " \e[32mO\e[0m ")
+  string = string.gsub(" \e[3\e[31mX\e[0mmX\e[0m ", " \e[31mX\e[0m ")
+  string = string.gsub(" \e[\e[32mO\e[0m1mX\e[0m ", " \e[31mX\e[0m ")
+  string.gsub(" \e[3\e[32mO\e[0mmX\e[0m ", " \e[31mX\e[0m ")
+end
 round

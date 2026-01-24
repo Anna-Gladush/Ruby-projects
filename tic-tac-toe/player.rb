@@ -23,11 +23,7 @@ class Player
     end
     @symbol_positions << answer
     # correcting rainbow replacing symbols with unreadable strings
-    a_row = a_row.gsub(" \e[\e[31mX\e[0m1mX\e[0m ", " \e[31mX\e[0m ")
-    a_row = a_row.gsub(" \e[\e[31mX\e[0m2mO\e[0m ", " \e[32mO\e[0m ")
-    a_row = a_row.gsub(" \e[3\e[31mX\e[0mmX\e[0m ", " \e[31mX\e[0m ")
-    a_row = a_row.gsub(" \e[\e[32mO\e[0m1mX\e[0m ", " \e[31mX\e[0m ")
-    a_row = a_row.gsub(" \e[3\e[32mO\e[0mmX\e[0m ", " \e[31mX\e[0m ")
+    a_row = ReplaceRainbow(a_row)
 
     [a_row, c_row, e_row]
   end

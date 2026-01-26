@@ -38,4 +38,4 @@ From Wikipedia:
 
 ## Mastermind
 
-nothing to see here
+[Mastermind](https://github.com/Anna-Gladush/Ruby-projects/tree/main/mastermind)

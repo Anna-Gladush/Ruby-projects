@@ -6,8 +6,7 @@ end
 class Player
 
 end
-# colors: violet, yellow, blue, green - guess
-# colors: white, black - feedback
+
 # HOW many guesses are left - counter! (10?)
 # board
 # feedback  guess
@@ -32,30 +31,16 @@ def user_guess
   [first, second, third, forth]
 end
 
-# pegs
-# Rainbow(peg).magenta
-# Rainbow(peg).green
-# Rainbow(peg).yellow
-# Rainbow(peg).cyan
-
-def player_turn_visual
+def player_turn_visual(up_str, down_str, guess)
   peg = "\u2022"
-  guess = user_guess
-  a = '|3 1|         '
-  b = '|4 2|  4 3 2 1'
-  a = a.gsub('|3 1|         ', "|3 1|  #{guess[3]} #{guess[2]} #{guess[1]} #{guess[0]}")
-  b = b.gsub('4 3 2 1', "#{guess[3]} #{guess[2]} #{guess[1]} #{guess[0]}")
-  a = a.gsub('v', Rainbow(peg).magenta)
-  a = a.gsub('b', Rainbow(peg).cyan)
-  a = a.gsub('y', Rainbow(peg).yellow)
-  a = a.gsub('g', Rainbow(peg).webgreen)
-  puts a, b
+  up_str = up_str.gsub('|3 1|         ', "|3 1|  #{guess[3]} #{guess[2]} #{guess[1]} #{guess[0]}")
+  down_str = down_str.gsub('4 3 2 1', "#{guess[3]} #{guess[2]} #{guess[1]} #{guess[0]}")
+  up_str = up_str.gsub('v', Rainbow(peg).magenta)
+  up_str = up_str.gsub('b', Rainbow(peg).cyan)
+  up_str = up_str.gsub('y', Rainbow(peg).yellow)
+  up_str = up_str.gsub('g', Rainbow(peg).webgreen)
+  [up_str, down_str]
 end
-
-# def check(code)
-#   guess = user_guess
-#   %w[v g y b].include?(user_guess)
-# end
 
 def check_col_peg(str)
   peg = "\u2022"
@@ -63,22 +48,29 @@ def check_col_peg(str)
   str.gsub('true', Rainbow(peg).red)
 end
 
-def feedback
-  code = %w[v g y b]
-  guess = %w[b v y g]
+def feedback(code, guess)
   feedback = []
   code.each_with_index do |val, idx|
-    feedback << (val == guess[idx]) # false false true false
+    feedback << (val == guess[idx]) # false true false false
   end
-  p feedback.reverse! # false true false false
+  feedback
 end
 
-def feedback_visual(feedback)
+def feedback_visual(feedback, up_str, down_str)
+  up_str = up_str.gsub('3 1', "#{feedback[2]} #{feedback[0]}")
+  down_str = down_str.gsub('4 2', "#{feedback[3]} #{feedback[1]}")
+  up_str = check_col_peg(up_str)
+  down_str = check_col_peg(down_str)
+  puts up_str, down_str
+end
+
+def game
   a = '|3 1|         '
   b = '|4 2|  4 3 2 1'
-  a = a.gsub('3 1', "#{feedback[2]} #{feedback[0]}")
-  b = b.gsub('4 2', "#{feedback[3]} #{feedback[1]}")
-  a = check_col_peg(a)
-  b = check_col_peg(b)
-  puts a, b
+  code = %w[v g y b] # g g y b
+  guess = user_guess
+  feed = feedback(code, guess)
+  vis = player_turn_visual(a, b, guess)
+  feedback_visual(feed, vis[0], vis[1])
 end
+game

@@ -7,6 +7,20 @@ class Player
 
 end
 
+def check_count?(arr)
+  if arr.count('b') >= 2 || arr.count('v') >= 2 || arr.count('y') >= 2 || arr.count('g') >= 2
+    false
+  else
+    true
+  end
+end
+
+def all_solutions
+  arr = %w[g v b y]
+  master_array = arr.product(arr, arr, arr)
+  master_array.select { |arr| arr.length == 4 && check_count?(arr) == true }
+end
+
 def col_peg(str)
   peg = "\u2022"
   str = str.gsub('v', Rainbow(peg).magenta)
@@ -22,17 +36,17 @@ def check_col_peg(str)
 end
 
 def user_guess
-  # Add check for valid input
+  arr = Array.new(4)
   puts 'Enter v for violet, b for blue, y for yellow, g for green'
   puts 'First slot: '
-  first = gets.chomp
+  arr[0] = gets.chomp until %w[v g y b].include?(arr[0])
   puts 'Second slot: '
-  second = gets.chomp
+  arr[1] = gets.chomp until %w[v g y b].include?(arr[1])
   puts 'Third slot: '
-  third = gets.chomp
+  arr[2] = gets.chomp until %w[v g y b].include?(arr[2])
   puts 'Forth slot: '
-  forth = gets.chomp
-  [first, second, third, forth]
+  arr[3] = gets.chomp until %w[v g y b].include?(arr[3])
+  arr
 end
 
 def player_turn_visual(up_str, down_str, guess)
@@ -45,7 +59,7 @@ end
 def feedback(code, guess)
   feedback = []
   code.each_with_index do |val, idx|
-    feedback << (val == guess[idx]) # false true false false
+    feedback << (val == guess[idx])
   end
   feedback
 end
@@ -70,7 +84,7 @@ def board(up_str, down_str)
   puts divider, up_str, down_str, divider
 end
 
-def cipher_code
+def player_code
   puts 'Enter v for violet, b for blue, y for yellow, g for green'
   puts 'Your code: '
   code = []
@@ -80,12 +94,14 @@ def cipher_code
   code
 end
 
-#code = %w[v g y b] # g g y b
+def computer_code
+  all_solutions.sample
+end
 
-def game
+def game(cipher, codebreaker)
   a = '|3 1|         '
   b = '|4 2|  4 3 2 1'
-  code = cipher_code
+  code = cipher
   puts `clear`
   board(a, b)
   i = 9
@@ -93,11 +109,32 @@ def game
     puts 'You lost' if i.zero?
     break if i.zero?
 
-    guess = user_guess
+    guess = codebreaker == 'player' ? user_guess : computer_guess
     turn(a, b, code, guess)
     i -= 1
     puts 'You cracked the code! Congratulations!' if feedback(code, guess).all?(true)
     break if feedback(code, guess).all?(true)
+  end
+end
+
+def computer_guess
+  initial_guess = %w[v v v v]
+  initial_guess
+end
+
+def computer_game
+  puts 'Who will be the codebreaker?'
+  mode = nil
+  until %w[a b].include?(mode)
+    puts 'Please enter: '
+    puts 'a) Player      b) Computer'
+    mode = gets.chomp
+  end
+  if mode == 'a'
+    game(computer_code, 'player')
+  else
+    # computer is the codebreaker
+    puts 'Sorry, not yet'
   end
 end
 
@@ -110,28 +147,10 @@ def mode
     mode = gets.chomp
   end
   if mode == 'a'
-    game
-  elsif mode == 'b'
-    # computer game
-    # chose whether you make code or computer, and thus who will be breaking it
-    puts 'Sorry, not yet'
-  end
-end
-
-# mode
-
-def check_count?(arr)
-  if arr.count('b') >= 2 || arr.count('v') >= 2 || arr.count('y') >= 2 || arr.count('g') >= 2
-    false
+    game(player_code, 'player')
   else
-    true
+    computer_game
   end
 end
 
-def all_solutions
-  arr = %w[g v b y]
-  master_array = arr.product(arr, arr, arr)
-  arr = master_array.select { |arr| arr.length == 4 && check_count?(arr) == true }
-  arr.length
-end
-p all_solutions
+mode

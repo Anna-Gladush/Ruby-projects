@@ -16,6 +16,19 @@ end
 # |3 1|
 # |4 2|  4 3 2 1
 # ---------------
+def col_peg(str)
+  peg = "\u2022"
+  str = str.gsub('v', Rainbow(peg).magenta)
+  str = str.gsub('b', Rainbow(peg).cyan)
+  str = str.gsub('y', Rainbow(peg).yellow)
+  str.gsub('g', Rainbow(peg).webgreen)
+end
+
+def check_col_peg(str)
+  peg = "\u2022"
+  str = str.gsub('false', Rainbow(peg).white)
+  str.gsub('true', Rainbow(peg).red)
+end
 
 def user_guess
   # Add check for valid input
@@ -32,20 +45,10 @@ def user_guess
 end
 
 def player_turn_visual(up_str, down_str, guess)
-  peg = "\u2022"
   up_str = up_str.gsub('|3 1|         ', "|3 1|  #{guess[3]} #{guess[2]} #{guess[1]} #{guess[0]}")
   down_str = down_str.gsub('4 3 2 1', "#{guess[3]} #{guess[2]} #{guess[1]} #{guess[0]}")
-  up_str = up_str.gsub('v', Rainbow(peg).magenta)
-  up_str = up_str.gsub('b', Rainbow(peg).cyan)
-  up_str = up_str.gsub('y', Rainbow(peg).yellow)
-  up_str = up_str.gsub('g', Rainbow(peg).webgreen)
+  up_str = col_peg(up_str)
   [up_str, down_str]
-end
-
-def check_col_peg(str)
-  peg = "\u2022"
-  str = str.gsub('false', Rainbow(peg).white)
-  str.gsub('true', Rainbow(peg).red)
 end
 
 def feedback(code, guess)
@@ -64,13 +67,29 @@ def feedback_visual(feedback, up_str, down_str)
   puts up_str, down_str
 end
 
-def game
-  a = '|3 1|         '
-  b = '|4 2|  4 3 2 1'
-  code = %w[v g y b] # g g y b
-  guess = user_guess
+def game(up_str, down_str, code, guess)
   feed = feedback(code, guess)
-  vis = player_turn_visual(a, b, guess)
+  p feed
+  vis = player_turn_visual(up_str, down_str, guess)
   feedback_visual(feed, vis[0], vis[1])
 end
-game
+
+# def check_win(feedback)
+#   # false true false false
+#   break if feedback.all?(true) == true
+#   end
+# end
+
+a = '|3 1|         '
+b = '|4 2|  4 3 2 1'
+divider = '---------------'
+code = %w[v g y b] # g g y b
+puts 'MASTERMIND BOARD: '
+puts divider, a, b, divider
+i = 9
+while i >= 0
+  guess = user_guess
+  game(a, b, code, guess)
+  puts 'You cracked the code! Congratulations!' if feedback(code, guess).all?(true)
+  break if feedback(code, guess).all?(true)
+end

@@ -1,3 +1,4 @@
+# require 'rainbow'
 class Computer
 
 end
@@ -46,14 +47,16 @@ end
 # a = a.gsub("|3 1|         ","|3 1|  v b y g")
 # puts a, b
 
-# puts "Enter v for violet, b for blue, y for yellow, g for green"
-# puts "First slot: "
-# first_slot = gets.chomp
-# puts "Second slot: "
-# second_slot = gets.chomp
-# puts "Third slot: "
-# third_slot = gets.chomp
-# puts "Forth slot: "
-# forth_slot = gets.chomp
-# p first_slot, second_slot, third_slot, forth_slot
-# ["v", "g", "b", "y"]
+def user_guess
+  puts 'Enter v for violet, b for blue, y for yellow, g for green'
+  puts 'First slot: '
+  first = gets.chomp
+  puts 'Second slot: '
+  second = gets.chomp
+  puts 'Third slot: '
+  third = gets.chomp
+  puts 'Forth slot: '
+  forth = gets.chomp
+  [first, second, third, forth]
+end
+user_guess

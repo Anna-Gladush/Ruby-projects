@@ -32,6 +32,8 @@ From Wikipedia:
 
 [Bubble Sort](https://github.com/Anna-Gladush/Project-Caesar-Cipher/blob/main/4_bubble_sort.rb)
 
+# Not exactly OOP, because I don't understand it... will be fixed soon!
+
 ## Tic Tac Toe
 
 [Tic Tac Toe](https://github.com/Anna-Gladush/Ruby-projects/tree/main/tic-tac-toe)

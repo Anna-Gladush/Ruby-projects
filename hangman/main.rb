@@ -30,31 +30,41 @@ end
 
 def game
   word = random_word
-  p word, word.length
   guess_word = String.new('_' * word.length)
+  right_guess = []
   wrong_guess = []
-  try_left = 0
+  puts "Word length: #{word.length}"
   puts guess_word
+  try_left = 0
   while try_left <= 9
-    puts 'You won!' if word == guess_word
+    if word == guess_word
+      puts `clear`
+      puts 'You won!' 
+    end
     if try_left == 9
+      puts `clear`
       hangman(9)
       puts 'You lost!'
     end
     break if word == guess_word || try_left == 9
 
     guess = user_input
+    puts `clear`
     if word.include?(guess) == true
       idx = find_index(word, guess)
       idx.each { |i| guess_word[i] = guess }
+      right_guess << guess
     else
       hangman(try_left + 1)
       wrong_guess << guess
       try_left += 1
       puts "Tries left: #{9 - try_left}"
     end
+    
     puts guess_word
-    print "#{wrong_guess.join(', ')}\n"
+    puts "Word length: #{word.length}"
+    print "Wrong guesses: #{wrong_guess.join(', ')}\n"
+    print "Right guesses: #{right_guess.join(', ')}\n"
   end
 end
 

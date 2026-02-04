@@ -60,7 +60,6 @@ def game
       try_left += 1
       puts "Tries left: #{9 - try_left}"
     end
-    
     puts guess_word
     puts "Word length: #{word.length}"
     print "Wrong guesses: #{wrong_guess.join(', ')}\n"

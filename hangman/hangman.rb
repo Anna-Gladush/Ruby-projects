@@ -90,13 +90,37 @@ class Hangman
     puts '========='
   end
 end
-hang = Hangman.new
-hang.level1
-hang.level2
-hang.level3
-hang.level4
-hang.level5
-hang.level6
-hang.level7
-hang.level8
-hang.gameover
+
+def hangman(num)
+  hang = Hangman.new
+  case num
+  when 1
+    hang.level1
+  when 2
+    hang.level2
+  when 3
+    hang.level3
+  when 4
+    hang.level4
+  when 5
+    hang.level5
+  when 6
+    hang.level6
+  when 7
+    hang.level7
+  when 8
+    hang.level8
+  when 9
+    hang.gameover
+  end
+end
+# hang = Hangman.new
+# hang.level1
+# hang.level2
+# hang.level3
+# hang.level4
+# hang.level5
+# hang.level6
+# hang.level7
+# hang.level8
+# hang.gameover

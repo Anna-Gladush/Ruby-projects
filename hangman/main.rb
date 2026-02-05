@@ -6,7 +6,7 @@ def save_progress(word, guess_word, try, wrong, right)
     word: word,
     guess_word: guess_word,
     try_left: try,
-    wrong_guesses: wrong,
+    wrong_guess: wrong,
     right_guess: right
   }
   File.write('progress.json', JSON.pretty_generate(progress))
@@ -14,14 +14,20 @@ end
 
 def receive_progress
   data = JSON.load_file('progress.json')
-  puts data
+  [data['word'], data['guess_word'], data['try_left'], data['wrong_guess'], data['right_guess']]
 end
 
 def load
-  s_and_l = 'If you want to load your previous progress type "load"'
-  puts s_and_l
+  puts 'Would you like to load previous game (Y/N): '
   load = gets.chomp.downcase
-  receive_progress if load == 'load'
+  if %w[y yes].include?(load)
+    receive_progress
+  elsif %w[n no].include?(load)
+    default
+  else
+    puts "I don't understand"
+    load
+  end
 end
 
 def default
@@ -62,13 +68,14 @@ def user_input
 end
 
 def game
-  word = random_word
-  guess_word = String.new('_' * word.length)
-  right_guess = []
-  wrong_guess = []
+  game_info = load
+  word = game_info[0]
+  guess_word = game_info[1]
+  try_left = game_info[2]
+  wrong_guess = game_info[3]
+  right_guess = game_info[4]
   puts "Word length: #{word.length}"
   puts guess_word
-  try_left = 0
   while try_left <= 9
     if word == guess_word
       puts `clear`
@@ -99,8 +106,8 @@ def game
   end
 end
 
-# save_progress('unnecessary', 'u__ecessary', 3, 6, 7)
-# p receive_progress
-# game
+# save_progress('unnecessary', 'u__ecessary', 3, ["f", "o", "d", "k", "m", "l"], ["u", "e", "c", "s", "a", "r", "y"])
+# receive_progress
+game
 # load
 # p default

@@ -2,6 +2,6 @@
   "word": "unnecessary",
   "guess_word": "u__ecessary",
   "try_left": 3,
-  "wrong_guesses": 6,
-  "right_guess": 7
+  "wrong_guess": ["f", "o", "d", "k", "m", "l"],
+  "right_guess": ["u", "e", "c", "s", "a", "r", "y"]
 }

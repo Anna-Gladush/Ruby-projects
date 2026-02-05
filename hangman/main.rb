@@ -2,6 +2,7 @@ require 'json'
 require_relative 'hangman'
 
 def save_progress(word, guess_word, try, wrong, right)
+  puts 'Do you want to save progress? (Y/N)'
   progress = {
     word: word,
     guess_word: guess_word,
@@ -9,7 +10,9 @@ def save_progress(word, guess_word, try, wrong, right)
     wrong_guess: wrong,
     right_guess: right
   }
-  File.write('progress.json', JSON.pretty_generate(progress))
+  prog = nil
+  prog = gets.chomp.downcase until %w[y yes n no].include?(prog)
+  File.write('progress.json', JSON.pretty_generate(progress)) if %w[y yes].include?(prog)
 end
 
 def receive_progress
@@ -19,7 +22,7 @@ end
 
 def load
   load = nil
-  puts 'Would you like to load previous game (Y/N): '
+  puts 'Would you like to load previous game? (Y/N)'
   load = gets.chomp.downcase until %w[y yes n no].include?(load)
   if %w[y yes].include?(load)
     receive_progress
@@ -102,6 +105,7 @@ def game
     puts "Word length: #{word.length}"
     print "Wrong guesses: #{wrong_guess.join(', ')}\nMistakes left: #{9 - try_left}\n"
     print "Right guesses: #{right_guess.join(', ')}\n"
+    save_progress(word, guess_word, try_left, wrong_guess, right_guess)
   end
 end
 

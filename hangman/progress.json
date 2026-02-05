@@ -1,7 +1,14 @@
 {
-  "word": "unnecessary",
-  "guess_word": "u__ecessary",
+  "word": "spouse",
+  "guess_word": "s__us_",
   "try_left": 3,
-  "wrong_guess": ["f", "o", "d", "k", "m", "l"],
-  "right_guess": ["u", "e", "c", "s", "a", "r", "y"]
+  "wrong_guess": [
+    "a",
+    "f",
+    "t"
+  ],
+  "right_guess": [
+    "u",
+    "s"
+  ]
 }

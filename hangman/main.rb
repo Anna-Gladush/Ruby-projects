@@ -1,3 +1,4 @@
+require json
 require_relative 'hangman'
 
 def find_index(str, letter)
@@ -39,7 +40,7 @@ def game
   while try_left <= 9
     if word == guess_word
       puts `clear`
-      puts 'You won!' 
+      puts 'You won!'
     end
     if try_left == 9
       puts `clear`
@@ -55,16 +56,19 @@ def game
       idx.each { |i| guess_word[i] = guess }
       right_guess << guess
     else
-      hangman(try_left + 1)
       wrong_guess << guess
       try_left += 1
-      puts "Tries left: #{9 - try_left}"
     end
+    hangman(try_left + 1)
     puts guess_word
     puts "Word length: #{word.length}"
-    print "Wrong guesses: #{wrong_guess.join(', ')}\n"
+    print "Wrong guesses: #{wrong_guess.join(', ')}\nMistakes left: #{9 - try_left}\n"
     print "Right guesses: #{right_guess.join(', ')}\n"
   end
+end
+
+def save
+  File.open('progress.json')
 end
 
 game

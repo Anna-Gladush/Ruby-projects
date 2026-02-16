@@ -1,4 +1,4 @@
-require_relative '../game.rb'
+require_relative '../game'
 describe Game do
   describe '#introduction' do
     # only puts

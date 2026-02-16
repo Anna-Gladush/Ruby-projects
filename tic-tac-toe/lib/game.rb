@@ -13,6 +13,7 @@ class Game
   end
 
   def game(player1, player2)
+    introduction
     answer = [@a_row, @c_row, @e_row]
     i = 9
     while i >= 1

@@ -24,9 +24,7 @@ From [Wikipedia](https://en.wikipedia.org/wiki/Bubble_sort):
 
 "Bubble sort, sometimes referred to as sinking sort, is a simple sorting algorithm that repeatedly steps through the input list element by element, comparing the current element with the one after it, swapping their values if needed. These passes through the list are repeated until no swaps have to be performed during a pass, meaning that the list has become fully sorted."
 
-## Tic Tac Toe
-
-[Tic Tac Toe](https://github.com/Anna-Gladush/Ruby-projects/tree/main/tic-tac-toe)
+## [Tic Tac Toe](https://github.com/Anna-Gladush/Ruby-projects/tree/main/tic-tac-toe)
 
 # Not exactly OOP, because I don't understand it... will be fixed soon!
 

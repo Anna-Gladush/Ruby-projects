@@ -5,23 +5,30 @@ class Player
   def initialize(symbol)
     @symbol = symbol
   end
+  def input
+    answer = nil
+    until %w[1 2 3 4 5 6 7 8 9].include?(answer)
+      puts 'Enter a number from 1 to 9'
+      answer = gets.chomp
+    end
+    answer
+  end
+
+  def symbol_assignment
+    @symbol == 'X' ? Rainbow(symbol).red : Rainbow(symbol).green
+  end
 
   def user_input(a_row, c_row, e_row, symbol_positions)
-    answer = nil
-    until [1, 2, 3, 4, 5, 6, 7, 8, 9].include?(answer)
-      puts 'Enter a number from 1 to 9'
-      answer = gets.chomp.to_i
+    answer = input
+    col_sym = symbol_assignment
+    if a_row.include?(answer)
+      a_row = a_row.gsub(answer, col_sym)
+    elsif c_row.include?(answer)
+      c_row = c_row.gsub(answer, col_sym)
+    elsif e_row.include?(answer)
+      e_row = e_row.gsub(answer, col_sym)
     end
-    answer_str = answer.to_s
-    col_sym = @symbol == 'X' ? Rainbow(symbol).red : Rainbow(symbol).green
-    if a_row.include?(answer_str)
-      a_row = a_row.gsub(answer_str, col_sym)
-    elsif c_row.include?(answer_str)
-      c_row = c_row.gsub(answer_str, col_sym)
-    elsif e_row.include?(answer_str)
-      e_row = e_row.gsub(answer_str, col_sym)
-    end
-    symbol_positions << answer
+    symbol_positions << answer.to_i
     # correcting rainbow replacing symbols with unreadable strings
     a_row = replace_artifacts(a_row)
 

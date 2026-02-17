@@ -5,25 +5,13 @@ class Player
   def initialize(symbol)
     @symbol = symbol
   end
-  def input
-    answer = nil
+
+  def input(answer = nil)
     until %w[1 2 3 4 5 6 7 8 9].include?(answer)
       puts 'Enter a number from 1 to 9'
       answer = gets.chomp
     end
     answer
-  end
-
-  def symbol_assignment
-    @symbol == 'X' ? Rainbow(symbol).red : Rainbow(symbol).green
-  end
-
-  def string_assignment(str, answer, col_sym)
-    if str.include?(answer)
-      str.gsub(answer, col_sym)
-    else
-      str
-    end
   end
 
   def user_input(a_row, c_row, e_row, symbol_positions)
@@ -59,5 +47,17 @@ class Player
     string = string.gsub(" \e[3\e[31mX\e[0mmX\e[0m ", " \e[31mX\e[0m ")
     string = string.gsub(" \e[\e[32mO\e[0m1mX\e[0m ", " \e[31mX\e[0m ")
     string.gsub(" \e[3\e[32mO\e[0mmX\e[0m ", " \e[31mX\e[0m ")
+  end
+
+  def symbol_assignment
+    @symbol == 'X' ? Rainbow(symbol).red : Rainbow(symbol).green
+  end
+
+  def string_assignment(str, answer, col_sym)
+    if str.include?(answer)
+      str.gsub(answer, col_sym)
+    else
+      str
+    end
   end
 end
